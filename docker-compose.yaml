@@ -1,0 +1,21 @@
+# File : house-price-predictor/docker-compose.yaml
+services: 
+  fastapi: 
+    image: initcron/fastapi:dev   #replace with actual docker user id
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports: 
+      - 8002:8000
+
+  streamlit: 
+    image: initcron/streamlit:dev  #replace with actual docker user id
+    build:
+      context: ./streamlit_app
+      dockerfile: Dockerfile
+    ports:
+      - 8502:8501
+    environment: 
+      API_URL: http://fastapi:8000 
+
+
